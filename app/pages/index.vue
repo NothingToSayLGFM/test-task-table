@@ -147,7 +147,6 @@ watch(
       },
     });
   },
-  { deep: true },
 );
 watch([userPerPage, userSelectedRole, userSearchNameOrEmail], () => {
   userPage.value = 1;
