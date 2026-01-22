@@ -149,10 +149,7 @@ watch(
   },
   { deep: true },
 );
-watch(
-  [userPerPage, userSelectedRole, userSearchNameOrEmail, sortBy, sortDirection],
-  () => {
-    userPage.value = 1;
-  },
-);
+watch([userPerPage, userSelectedRole, userSearchNameOrEmail], () => {
+  userPage.value = 1;
+});
 </script>
