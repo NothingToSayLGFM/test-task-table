@@ -1,75 +1,12 @@
-# Nuxt Minimal Starter
+Виконані всі критерії тестового завдання
+- Фільтрація: role + search
+- Сортування: age, createdAt
+- Пагінація: показувати 10 елементів
+- Фіксований header таблиці при скролі
+- Зберігати стан у query params: filters, sort, page, perPage
+- При reload сторінки — відновлювати стан
+- Перемикач: 10 / 15 / 20 елементів
+- Зміна теми: світла / темна
+- Debounce для пошуку
 
-Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
-
-## Setup
-
-Make sure to install dependencies:
-
-```bash
-# npm
-npm install
-
-# pnpm
-pnpm install
-
-# yarn
-yarn install
-
-# bun
-bun install
-```
-
-## Development Server
-
-Start the development server on `http://localhost:3000`:
-
-```bash
-# npm
-npm run dev
-
-# pnpm
-pnpm dev
-
-# yarn
-yarn dev
-
-# bun
-bun run dev
-```
-
-## Production
-
-Build the application for production:
-
-```bash
-# npm
-npm run build
-
-# pnpm
-pnpm build
-
-# yarn
-yarn build
-
-# bun
-bun run build
-```
-
-Locally preview production build:
-
-```bash
-# npm
-npm run preview
-
-# pnpm
-pnpm preview
-
-# yarn
-yarn preview
-
-# bun
-bun run preview
-```
-
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+Я зробив таблицю що працюю через client-only бо просто хотів додати скелетон. Взагалі він як такий не потрібен тобто так с тією генерацією випадкових юзерів яка є зараз з Date буде викликати hydration-mistmach але це легко запривентити таким чином: userState('userData', () => users) якщо це використати то hydration-mistmach не буде і client-only не потрібен, я зробив як зробив просто заради прикольного скелетона 
