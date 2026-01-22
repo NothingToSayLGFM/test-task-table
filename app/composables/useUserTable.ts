@@ -11,7 +11,7 @@ export function useUsersTable(users: User[]) {
   );
   const searchInput = shallowRef((route.query.search as string) || "");
 
-  const userSelectedRole = ref(route.query.role || null);
+  const userSelectedRole = ref(route.query.role || "all");
   const userPerPage = ref(Number(route.query.perPage) || 10);
   const userPage = ref(Number(route.query.page) || 1);
 
