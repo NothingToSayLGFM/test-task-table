@@ -3,7 +3,7 @@ import type { User, SortDirection } from "~/types";
 import { useRoute } from "vue-router";
 import { watchDebounced } from "@vueuse/core";
 
-export function useUsersTable(users: User[]) {
+export function useUsersTable(users: Ref<User[]>) {
   const route = useRoute();
 
   const userSearchNameOrEmail = shallowRef(
@@ -11,7 +11,7 @@ export function useUsersTable(users: User[]) {
   );
   const searchInput = shallowRef((route.query.search as string) || "");
 
-  const userSelectedRole = ref(route.query.role || "all");
+  const userSelectedRole = ref((route.query.role as string) || "all");
   const userPerPage = ref(Number(route.query.perPage) || 10);
   const userPage = ref(Number(route.query.page) || 1);
 
@@ -21,7 +21,7 @@ export function useUsersTable(users: User[]) {
   );
 
   const filteredUsers = computed(() => {
-    return users.filter((user) => {
+    return users.value.filter((user) => {
       let matchesRole = true;
       let matchesSearch = true;
       if (userSelectedRole.value && userSelectedRole.value !== "all") {

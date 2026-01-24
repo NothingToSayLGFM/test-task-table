@@ -8,3 +8,7 @@ export interface User {
 }
 
 export type SortDirection = "asc" | "desc" | false;
+
+export type PaginationOptions = [10, 15, 20];
+
+export type Roles = ["admin", "manager", "user"];
