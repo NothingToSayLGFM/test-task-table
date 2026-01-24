@@ -1,11 +1,10 @@
-import type { User, Roles } from "~/types";
+import type { User, Roles } from "~~/types";
 import type { H3Event } from "h3";
 
 export const getUsers = defineCachedFunction(
   (_event: H3Event) => {
+    const roles: Roles = ["admin", "manager", "user"];
     return Array.from({ length: 50 }, (_, i): User => {
-      const roles: Roles = ["admin", "manager", "user"];
-
       return {
         id: i + 1,
         name: `User ${i + 1}`,

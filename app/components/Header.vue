@@ -12,7 +12,7 @@
       </UButton>
     </div>
     <template #fallback>
-      <div class="size-8" />
+      <div class="size-12" />
     </template>
   </ClientOnly>
 </template>

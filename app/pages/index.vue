@@ -7,9 +7,7 @@
       :user-select-options="userSelectOptions"
       :user-per-page-options="userPerPageOptions"
     />
-    <TableSkeleton v-if="status === 'pending'" />
     <UserTable
-      v-else
       :paginated-users="paginatedUsers"
       :sort-by="sortBy"
       :sort-direction="sortDirection"
@@ -25,10 +23,9 @@
 
 <script setup lang="ts">
 import { useRouter } from "vue-router";
-import TableSkeleton from "~/components/ui/skeletons/TableSkeleton.vue";
-import type { Roles, User, PaginationOptions } from "~/types";
+import type { Roles, User, PaginationOptions } from "~~/types";
 
-const { status, data: users } = await useFetch<User[]>("/api/users");
+const { data: users } = useFetch<User[]>("/api/users");
 
 const router = useRouter();
 

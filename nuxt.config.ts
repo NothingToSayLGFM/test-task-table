@@ -4,4 +4,7 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   modules: ["@nuxt/eslint", "@nuxt/ui", "@vueuse/nuxt"],
   css: ["~/assets/css/main.css"],
+  routeRules: {
+    "/": { prerender: true },
+  },
 });

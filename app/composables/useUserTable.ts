@@ -1,5 +1,5 @@
 import { ref, computed, shallowRef } from "vue";
-import type { User, SortDirection } from "~/types";
+import type { User, SortDirection } from "~~/types";
 import { useRoute } from "vue-router";
 import { watchDebounced } from "@vueuse/core";
 
