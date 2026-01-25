@@ -4,7 +4,7 @@ import type { H3Event } from "h3";
 export const getUsers = defineCachedFunction(
   (_event: H3Event) => {
     const roles: Roles = ["admin", "manager", "user"];
-    return Array.from({ length: 50 }, (_, i): User => {
+    const users = Array.from({ length: 50 }, (_, i): User => {
       return {
         id: i + 1,
         name: `User ${i + 1}`,
@@ -14,9 +14,14 @@ export const getUsers = defineCachedFunction(
         createdAt: new Date(Date.now() - i * 1000 * 60 * 60 * 24).toISOString(),
       };
     });
+    return users;
   },
   {
-    swr: false,
-    maxAge: 1000,
+    getKey: () => {
+      return "users";
+    },
+    swr: true,
+    staleMaxAge: 15,
+    maxAge: 10,
   },
 );

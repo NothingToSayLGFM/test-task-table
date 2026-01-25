@@ -1,9 +1,9 @@
-import { ref, computed, shallowRef } from "vue";
+import { ref, shallowRef } from "vue";
 import type { User, SortDirection } from "~~/types";
 import { useRoute } from "vue-router";
 import { watchDebounced } from "@vueuse/core";
 
-export function useUsersTable(users: Ref<User[]>) {
+export function useUsersTable() {
   const route = useRoute();
 
   const userSearchNameOrEmail = shallowRef(
@@ -19,33 +19,6 @@ export function useUsersTable(users: Ref<User[]>) {
   const sortDirection = ref<SortDirection>(
     (route.query.sortDirection as "asc" | "desc") || false,
   );
-
-  const filteredUsers = computed(() => {
-    return users.value.filter((user) => {
-      let matchesRole = true;
-      let matchesSearch = true;
-      if (userSelectedRole.value && userSelectedRole.value !== "all") {
-        matchesRole = user.role === userSelectedRole.value;
-      }
-      if (userSearchNameOrEmail.value) {
-        const search = userSearchNameOrEmail.value.toLowerCase();
-        matchesSearch =
-          user.name.toLowerCase().includes(search) ||
-          user.email.toLowerCase().includes(search);
-      }
-      return matchesRole && matchesSearch;
-    });
-  });
-
-  const paginatedUsers = computed(() => {
-    const start = (userPage.value - 1) * userPerPage.value;
-    const end = start + userPerPage.value;
-    return filteredUsers.value.slice(start, end);
-  });
-
-  const totalItems = computed(() => {
-    return filteredUsers.value.length;
-  });
 
   const sortUsers = (column) => {
     const current = column.getIsSorted();
@@ -76,7 +49,5 @@ export function useUsersTable(users: Ref<User[]>) {
     userSearchNameOrEmail,
     userPerPage,
     userPage,
-    paginatedUsers,
-    totalItems,
   };
 }

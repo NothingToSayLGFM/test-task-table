@@ -7,6 +7,13 @@ export interface User {
   createdAt: string;
 }
 
+export interface UsersResponse {
+  users: User[];
+  total: number;
+  page: number;
+  perPage: number;
+}
+
 export type SortDirection = "asc" | "desc" | false;
 
 export type PaginationOptions = [10, 15, 20];
