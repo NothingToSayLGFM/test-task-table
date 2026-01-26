@@ -1,15 +1,14 @@
-import { ref, shallowRef } from "vue";
+import { ref } from "vue";
 import type { User, SortDirection } from "~~/types";
 import { useRoute } from "vue-router";
-import { watchDebounced } from "@vueuse/core";
+import { refDebounced } from "@vueuse/core";
 
 export function useUsersTable() {
   const route = useRoute();
 
-  const userSearchNameOrEmail = shallowRef(
-    (route.query.search as string) || "",
-  );
-  const searchInput = shallowRef((route.query.search as string) || "");
+  const searchInput = ref((route.query.search as string) || "");
+
+  const userSearchNameOrEmail = refDebounced(searchInput, 500);
 
   const userSelectedRole = ref((route.query.role as string) || "all");
   const userPerPage = ref(Number(route.query.perPage) || 10);
@@ -31,14 +30,6 @@ export function useUsersTable() {
     }
     column.toggleSorting(column.getIsSorted() === "asc");
   };
-
-  watchDebounced(
-    searchInput,
-    () => {
-      userSearchNameOrEmail.value = searchInput.value;
-    },
-    { debounce: 400, maxWait: 500 },
-  );
 
   return {
     sortUsers,
